@@ -28,6 +28,7 @@ function App() {
   }
 
   // destructure the job fields, initially grabbing the first job in the array
+  // be sure this is below the if loading condition, bc there won't be any duties loaded causing an error
   const { title, dates, company, duties } = jobs[value];
 
   return (
@@ -38,6 +39,19 @@ function App() {
       </div>
       <div className="jobs-center">
         {/* btn container */}
+        <div className="btn-container">
+          {jobs.map((item, index) => {
+            return (
+              <button
+                key={item.id}
+                onClick={() => setValue(index)}
+                className={`job-btn ${index === value && 'active-btn'}`}
+              >
+                {item.company}
+              </button>
+            );
+          })}
+        </div>
         {/* job info */}
         <article className="job-info">
           <h3>{title}</h3>
